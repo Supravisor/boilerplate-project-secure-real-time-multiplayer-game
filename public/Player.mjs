@@ -38,7 +38,10 @@ class Player {
   }
 
   calculateRank(arr) {
+      const sortPlayers = arr.sort((a, b) => b.score - a.score);
+      const rank = sortPlayers.findIndex(player => player.id === this.id) + 1;
 
+      return `Rank ${rank}/${sortPlayers.length}`;
   }
 }
 
