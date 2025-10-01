@@ -23,6 +23,10 @@ const canvasCalcs = {
   playFieldMaxY: (canvasHeight - playerHeight) - border,
 }
 
+const generateStartPos = (min, max, multiple) => {
+  return Math.floor(Math.random() * ((max - min) / multiple)) * multiple + min;
+};
+
 const loadImage = src => {
   const img = new Image();
   img.src = src;
