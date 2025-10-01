@@ -28,6 +28,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  res.set('X-Powered-By', 'PHP 7.4.3');
+  next();
+});
+
 //For FCC testing purposes and enables user to connect from outside the hosting platform
 app.use(cors({origin: '*'})); 
 
