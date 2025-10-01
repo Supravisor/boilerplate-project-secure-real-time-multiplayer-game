@@ -26,7 +26,15 @@ class Player {
   }
 
   collision(item) {
+    const player = 15;
+    const collectible = 15;
 
+    return (
+      this.x < item.x + collectible &&
+      this.x < item.x + player.x &&
+      this.y < item.y + collectible &&
+      this.y < player
+    );
   }
 
   calculateRank(arr) {
