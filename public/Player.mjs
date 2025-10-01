@@ -7,6 +7,22 @@ class Player {
   }
 
   movePlayer(dir, speed) {
+    switch (dir) {
+      case "up":
+        this.y -= speed;
+        break;
+      case "down":
+        this.y += speed;
+        break;
+      case "left":
+        this.x -= speed;
+        break;
+      case "right":
+        this.x += speed;
+        break;
+      default:
+        throw new Error("Invalid direction");
+    }
   }
 
   collision(item) {
