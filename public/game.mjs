@@ -79,3 +79,38 @@ socket.on('init', ({ id, players, coin }) => {
 });
 
 
+const draw = () => {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  context.fillStyle = '#220';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  context.strokeStyle = 'white';
+  context.strokeRect(canvasCalcs.playFieldMinX, canvasCalcs.playFieldMinY, canvasCalcs.playFieldWidth, canvasCalcs.playFieldHeight);
+
+  context.fillStyle = 'white'; 
+  context.font = "13px 'Press Start 2P'";
+  context.textAlign = 'center';
+  context.fillText('Controls: WASD', 100, 32.5);
+
+  context.font = "16px 'Press Start'";
+  context.fillText('Coin Race', canvasCalcs.canvasWidth / 2, 32.5);
+
+  currPlayers.forEach(player => {
+    player.draw(context, item, { mainPlayerArt, otherPlayerArt }, currPlayers);
+  });
+
+  item.draw(context, { bronzeCoinArt, silverCoinArt, goldCoinArt });
+
+  if (item.destroyed) {
+    socket.emit('destroy-item', { playerId: item.destroyed, coinValue: item.value, coinId: item.id });
+  }
+
+  if (endGame) {
+    context.fillStyle = 'white';
+    context.font = "13px 'Press Start 2P'";
+    context.fillText("You ${endGame}! Restart and try again.", canvasCalcs.canvasWidth / 2, 80);
+  }
+
+  if (!endGame) tick = requestAnimationFrame(draw);
+}
