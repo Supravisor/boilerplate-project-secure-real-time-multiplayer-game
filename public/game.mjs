@@ -22,3 +22,60 @@ let currPlayers = [];
 let item;
 let endGame;
 
+socket.on('init', ({ id, players, coin }) => {
+
+  const mainPlayer = new Player({ 
+    x: generateStartPos(canvasCalcs.playFieldMinX, canvasCalcs.playFieldMaxX, 5),
+    y: generateStartPos(canvasCalcs.playFieldMinY, canvasCalcs.playFieldMaxY, 5),
+    id, 
+    main: true 
+  });
+
+  controls(mainPlayer, socket);
+
+  socket.emit('new-player', mainPlayer);
+
+  socket.on('new-player', obj => {
+    // Check that player doesn't already exist
+    const playerIds = currPlayers.map(player => player.id);
+    if (!playerIds.includes(obj.id)) currPlayers.push(new Player(obj));
+  });
+
+  socket.on('move-player', ({ id, dir, posObj }) => {
+    const movingPlayer = currPlayers.find(obj => obj.id === id);
+    movingPlayer.moveDir(dir);
+    
+    movingPlayer.x = posObj.x;
+    movingPlayer.y = posObj.y;
+  });
+
+  socket.on('stop-player', ({ id, dir, posObj }) => {
+    const stoppingPlayer = currPlayers.find(obj => obj.id === id);
+    stoppingPlayer.stopDir(dir);
+
+    stoppingPlayer.x = posObj.x;
+    stoppingPlayer.y = posObj.y;
+  });
+
+  socket.on('new-coin', newCoin => {
+    item = new Collectible(newCoin);
+  });
+
+  socket.on('remove-player', id => {
+    currPlayers = currPlayers.filter(player => player.id !== id);
+  });
+
+  socket.on('end-game', result => endGame = result); 
+
+  socket.on('update-player', playerObj => {
+    const scoringPlayer = currPlayers.find(obj => obj.id === playerObj.id);
+    scoringPlayer.score = playerObj.score;
+  });
+
+  currPlayers = players.map(val => new Player(val)).concat(mainPlayer);
+  item = new Collectible(coin);
+
+  draw();
+});
+
+
