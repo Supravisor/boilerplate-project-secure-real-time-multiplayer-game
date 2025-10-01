@@ -16,3 +16,9 @@ const silverCoinArt = loadImage('https://cdn.freecodecamp.org/demo-projects/imag
 const goldCoinArt = loadImage('https://cdn.freecodecamp.org/demo-projects/images/gold-coin.png');
 const mainPlayerArt = loadImage('https://cdn.freecodecamp.org/demo-projects/images/main-player.png');
 const otherPlayerArt = loadImage('https://cdn.freecodecamp.org/demo-projects/images/other-player.png');
+
+let tick;
+let currPlayers = [];
+let item;
+let endGame;
+
