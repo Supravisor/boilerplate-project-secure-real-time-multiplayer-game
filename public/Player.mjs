@@ -1,5 +1,5 @@
 class Player {
-  constructor({x, y, score, id}) {
+  constructor({x=30, y=30, score=0, id}) {
     this.x = x;
     this.y = y;
     this.score = score;
