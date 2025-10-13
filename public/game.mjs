@@ -52,3 +52,15 @@ window.addEventListener('keyup', (event) => {
   keys[event.key] = false;
 });
 
+socket.on('playerMoved', (movementData) => {
+  if (players[movementData.playerId]) {
+    players[movementData.playerId].x = movementData.x;
+    players[movementData.playerId].y = movementData.y;
+  } else {
+    players[movementData.playerId] = movementData;
+  }
+});
+
+socket.on('playerDisconnected', (disconnectedPlayerId) => {
+  delete players[disconnectedPlayerId];
+});
