@@ -70,4 +70,19 @@ const server = app.listen(portNum, () => {
   }
 });
 
+const io = socket(server);
+
+io.on('connection', (socket) => {
+  console.log('A player connected');
+
+  socket.on('playerMoved', (movementData) => {
+    socket.broadcast.emit('playerMoved', { playerId: socket.id, ...movementData });
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A player disconnected');
+    io.emit('playerDisconnected', socket.id);
+  });
+});
+
 module.exports = app; // For testing
