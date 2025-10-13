@@ -26,7 +26,7 @@ const COLLECTIBLE_SIZE = 30;
 const PLAYER_SPEED = 350;
 
 const playerImage = new Image();
-playerImage.src = 'https://cdn.freecodecamp.org/demo-projects/images/main-player.png';
+playerImage.src = 'https://raw.githubusercontent.com/Supravisor/boilerplate-project-secure-real-time-multiplayer-game/refs/heads/main/public/main-player.png';
 
 const collectibleImage = new Collectible(1,2,1,3).image();
 
