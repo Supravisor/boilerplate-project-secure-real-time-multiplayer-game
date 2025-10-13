@@ -32,3 +32,23 @@ const collectibleImage = new Collectible(1,2,1,3).image();
 
 canvas.width = canvasWidth;
 canvas.height = canvasHeight + upperCanvasHeight;
+
+const player = new Player(300, 300, 0, 1);
+
+const collectibles = [];
+const desiredCollectibleCount = 1;
+
+const keys = {};
+
+const socket = io();
+const players = {};
+const playerId = socket.id;
+
+window.addEventListener('keydown', (event) => {
+  keys[event.key] = true;
+});
+
+window.addEventListener('keyup', (event) => {
+  keys[event.key] = false;
+});
+
