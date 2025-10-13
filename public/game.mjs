@@ -20,3 +20,15 @@ const borderGradient = context.createLinearGradient(0, upperCanvasHeight - borde
 borderGradient.addColorStop(0, 'rgba(0, 0, 0, 0)');  
 borderGradient.addColorStop(0.5, '#272727');           
 borderGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');    
+
+const PLAYER_SIZE = 30;
+const COLLECTIBLE_SIZE = 30;
+const PLAYER_SPEED = 350;
+
+const playerImage = new Image();
+playerImage.src = 'https://cdn.freecodecamp.org/demo-projects/images/main-player.png';
+
+const collectibleImage = new Collectible(1,2,1,3).image();
+
+canvas.width = canvasWidth;
+canvas.height = canvasHeight + upperCanvasHeight;
