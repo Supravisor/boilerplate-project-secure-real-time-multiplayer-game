@@ -5,7 +5,11 @@ class Collectible {
     this.value = value;
     this.id = id;
   }
-
+  image() {
+    const image = new Image();
+      image.src = 'https://raw.githubusercontent.com/Supravisor/boilerplate-project-secure-real-time-multiplayer-game/refs/heads/main/public/bronze-coin.png';
+    return image;
+  }
 }
 
 /*
